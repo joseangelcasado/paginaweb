@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero - JUEGA+</title>
+    <link rel="icon" href="JUEGA+.ico" type="image/x-icon">
+    <link rel="stylesheet" href="cajero.css">
+</head>
+<body>
+    <header>
+        <h1>JUEGA+</h1>
+        <p class="subtitulo">La mayor casa de juegos de Europa</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="localizacion.html">Localización</a></li>
+                <li>
+                    <a href="servicios.html">Servicios</a>
+                    <ul class="submenu">
+                        <li><a href="restaurante.html">Restaurante</a></li>
+                        <li><a href="sala_juegos.html">Sala de Juegos</a></li>
+                        <li><a href="cajero.html">Cajero</a></li>
+                    </ul>
+                </li>
+                <li><a href="oferta.html">Oferta</a></li>
+                <li><a href="galeria.html">Galería</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Conversor de Moneda</h2>
+        <div class="conversor">
+            <label for="cantidad">Cantidad en Euros (€):</label>
+            <input type="number" id="cantidad" placeholder="Ingrese cantidad" step="0.01">
+
+            <label for="moneda">Convertir a:</label>
+            <select id="moneda">
+                <option value="usd">Dólares ($)</option>
+                <option value="gbp">Libras (£)</option>
+                <option value="mxn">Pesos Mexicanos (MXN)</option>
+            </select>
+
+            <button onclick="convertir()">Convertir</button>
+
+            <p id="resultado"></p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+            <a href="https://x.com/?lang=es" target="_blank">X</a> |
+            <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+            <a href="https://www.tiktok.com" target="_blank">TikTok</a>
+        </div>
+        <p>&copy; Hecho por Jose Angel Casado 1º DAM</p>
+        <p>Sala de Juegos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function convertir() {
+            let cantidad = parseFloat(document.getElementById("cantidad").value);
+            let moneda = document.getElementById("moneda").value;
+            let tasas = {
+                "usd": 1.08,  // 1 EUR = 1.08 USD
+                "gbp": 0.85,  // 1 EUR = 0.85 GBP
+                "mxn": 18.50  // 1 EUR = 18.50 MXN
+            };
+
+            if (!cantidad || cantidad <= 0) {
+                document.getElementById("resultado").innerHTML = "<span class='error'>Ingrese una cantidad válida.</span>";
+                return;
+            }
+
+            let convertido = cantidad * tasas[moneda];
+            let simbolo = moneda === "usd" ? "$" : moneda === "gbp" ? "£" : "MXN";
+            document.getElementById("resultado").innerHTML = `<span class='resultado'>${cantidad} € equivale a ${convertido.toFixed(2)} ${simbolo}</span>`;
+        }
+    </script>
+</body>
+</html>
